@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_flutter_web/pages/about_me_page.dart';
+import 'package:portfolio_flutter_web/pages/contact_me_page.dart';
+import 'package:portfolio_flutter_web/pages/my_projects_page.dart';
+import 'package:portfolio_flutter_web/components/my_sliver_app_bar_delegate.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'João F. F. Nogueira - Flutter Developer';
 
   @override
   Widget build(BuildContext context) {
@@ -44,45 +48,34 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
             floating: true,
             expandedHeight: 160.0,
             flexibleSpace: const FlexibleSpaceBar(
-              title: Text('SliverAppBar'),
+              title: Text('João F. F. Nogueira - Flutter Developer'),
               background: FlutterLogo(),
             ),
           ),
           SliverPersistentHeader(
-            delegate: _SliverAppBarDelegate(
+            delegate: MySliverAppBarDelegate(
               TabBar(
                 controller: _tabController,
                 labelColor: Colors.black87,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
-                  Tab(icon: Icon(Icons.account_circle), text: "Tab 1"),
-                  Tab(icon: Icon(Icons.code), text: "Tab 2"),
-                  Tab(icon: Icon(Icons.contact_mail), text: "Tab 2"),
+                  Tab(icon: Icon(Icons.account_circle), text: "About me"),
+                  Tab(icon: Icon(Icons.code), text: "My Projects"),
+                  Tab(icon: Icon(Icons.contact_mail), text: "Contact me"),
                 ],
               ),
             ),
             pinned: true,
+            floating: false,
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-              child: Center(
-                child: Text('Scroll to see the SliverAppBar in effect.'),
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  color: index.isOdd ? Colors.white : Colors.black12,
-                  height: 100.0,
-                  child: Center(
-                    child: Text('$index', textScaleFactor: 5),
-                  ),
-                );
-              },
-              childCount: 20,
+          SliverFillRemaining(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                AboutMePage(),
+                MyProjectsPage(),
+                ContactMePage(),
+              ],
             ),
           ),
         ],
