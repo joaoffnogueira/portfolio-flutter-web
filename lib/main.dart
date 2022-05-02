@@ -47,9 +47,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
             snap: true,
             floating: true,
             expandedHeight: 160.0,
-            flexibleSpace: const FlexibleSpaceBar(
+            flexibleSpace: FlexibleSpaceBar(
               title: Text('João F. F. Nogueira - Flutter Developer'),
-              background: FlutterLogo(),
+              background: Image.network(
+                'https://joaonogueira.dev/img/logo.png',
+                height: 160,
+                ),
             ),
           ),
           SliverPersistentHeader(
